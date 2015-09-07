@@ -1,4 +1,4 @@
-package typeInfo;
+package twg2.primitiveIoTypes;
 
 /** Data types
  * @author TeamworkGuy2

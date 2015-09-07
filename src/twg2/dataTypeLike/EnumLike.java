@@ -1,4 +1,4 @@
-package dataTypeLike;
+package twg2.dataTypeLike;
 
 import java.util.List;
 
@@ -9,7 +9,9 @@ import java.util.List;
  */
 public interface EnumLike<T> {
 
-	/** Returns the list of values in this enumeration
+	/** Returns the list of values in this enumeration.
+	 * The return list SHOULD BE immutable and multiple calls to this method from the same
+	 * JVM session MUST return the same reference list for multi-thread programs and caching purposes.
 	 * @return the values in this enumeration
 	 */
 	public List<T> values();
