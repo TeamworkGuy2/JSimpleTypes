@@ -6,7 +6,7 @@ import lombok.Getter;
  * @author TeamworkGuy2
  * @since 20151-18
  */
-public enum JavaPrimitive {
+public enum JPrimitiveType {
 	BOOLEAN(Boolean.TYPE, Boolean.class, IoType.BOOLEAN, PrimitiveOrString.BOOLEAN, Boolean.FALSE,              "boolean","Boolean",  "boolean","Boolean","boolean",  "Boolean"),
 	BYTE(Byte.TYPE, Byte.class, IoType.BYTE, PrimitiveOrString.BYTE,                Byte.valueOf((byte)0),      "byte",   "Byte",     "byte",   "Byte",   "byte",     "Byte"),
 	CHAR(Character.TYPE, Character.class, IoType.CHAR, PrimitiveOrString.CHAR,      Character.valueOf((char)0), "char",   "Character","char",   "Char",   "character","Character"),
@@ -29,7 +29,7 @@ public enum JavaPrimitive {
 	final @Getter String fullTitleCaseName;
 
 
-	private JavaPrimitive(Class<?> type, Class<?> wrapperType, IoType ioType, PrimitiveOrString primitiveOrStringType, Object defaultValue, String javaPrimitiveName, String javaObjectName,
+	private JPrimitiveType(Class<?> type, Class<?> wrapperType, IoType ioType, PrimitiveOrString primitiveOrStringType, Object defaultValue, String javaPrimitiveName, String javaObjectName,
 			String shortName, String shortTitleCaseName, String fullName, String fullTitleCaseName) {
 		this.type = type;
 		this.wrapperType = wrapperType;
@@ -46,8 +46,8 @@ public enum JavaPrimitive {
 	}
 
 
-	public static final JavaPrimitive getByType(Class<?> type) {
-		JavaPrimitive prim = tryGetByType(type);
+	public static final JPrimitiveType fromType(Class<?> type) {
+		JPrimitiveType prim = tryFromType(type);
 		if(prim == null) {
 			throw new IllegalArgumentException("unknown primitive type: " + type);
 		}
@@ -55,7 +55,7 @@ public enum JavaPrimitive {
 	}
 
 
-	public static final JavaPrimitive tryGetByType(Class<?> type) {
+	public static final JPrimitiveType tryFromType(Class<?> type) {
 		if(type == Boolean.TYPE || type == Boolean.class) {
 			return BOOLEAN;
 		}
@@ -86,8 +86,8 @@ public enum JavaPrimitive {
 	}
 
 
-	public static final JavaPrimitive getWrapperType(Class<?> type) {
-		JavaPrimitive prim = tryGetWrapperType(type);
+	public static final JPrimitiveType fromWrapperType(Class<?> type) {
+		JPrimitiveType prim = tryFromWrapperType(type);
 		if(prim == null) {
 			throw new IllegalArgumentException("unknown primitive wrapper type: " + type);
 		}
@@ -95,7 +95,7 @@ public enum JavaPrimitive {
 	}
 
 
-	public static final JavaPrimitive tryGetWrapperType(Class<?> type) {
+	public static final JPrimitiveType tryFromWrapperType(Class<?> type) {
 		if(type == Boolean.TYPE) {
 			return BOOLEAN;
 		}
@@ -126,8 +126,8 @@ public enum JavaPrimitive {
 	}
 
 
-	public static final JavaPrimitive getPrimitiveType(Class<?> type) {
-		JavaPrimitive prim = tryGetPrimitiveType(type);
+	public static final JPrimitiveType fromPrimitiveType(Class<?> type) {
+		JPrimitiveType prim = tryFromPrimitiveType(type);
 		if(prim == null) {
 			throw new IllegalArgumentException("unknown primitive type: " + type);
 		}
@@ -135,7 +135,7 @@ public enum JavaPrimitive {
 	}
 
 
-	public static final JavaPrimitive tryGetPrimitiveType(Class<?> type) {
+	public static final JPrimitiveType tryFromPrimitiveType(Class<?> type) {
 		if(type == Boolean.class) {
 			return BOOLEAN;
 		}
@@ -166,56 +166,103 @@ public enum JavaPrimitive {
 	}
 
 
-	public static final JavaPrimitive tryGetIoType(IoType t) {
+	public static final JPrimitiveType fromIoType(IoType t) throws IllegalArgumentException {
+		JPrimitiveType prim = tryFromIoType(t);
+		if(prim == null) {
+			throw new IllegalArgumentException("cannot convert " + IoType.class.getSimpleName() + " enum '" + t + "', has no " + JPrimitiveType.class.getSimpleName() + " equivalent");
+		}
+		return prim;
+	}
+
+
+	public static final JPrimitiveType tryFromIoType(IoType t) {
 		switch(t) {
 		case BOOLEAN:
-			return JavaPrimitive.BOOLEAN;
+			return BOOLEAN;
 		case BYTE:
-			return JavaPrimitive.BYTE;
+			return BYTE;
 		case CHAR:
-			return JavaPrimitive.CHAR;
+			return CHAR;
 		case SHORT:
-			return JavaPrimitive.SHORT;
+			return SHORT;
 		case INT:
-			return JavaPrimitive.INT;
+			return INT;
 		case LONG:
-			return JavaPrimitive.LONG;
+			return LONG;
 		case FLOAT:
-			return JavaPrimitive.FLOAT;
+			return FLOAT;
 		case DOUBLE:
-			return JavaPrimitive.DOUBLE;
+			return DOUBLE;
 		case BINARY:
-			throw new IllegalArgumentException("cannot convert IoType enum '" + IoType.BINARY + "', has no JavaPrimitive equivalent");
+			return null;
 		case STRING:
-			throw new IllegalArgumentException("cannot convert IoType enum '" + IoType.STRING + "', has no JavaPrimitive equivalent");
+			return null;
 		default:
-			throw new IllegalArgumentException("cannot convert IoType enum '" + t + "' to JavaPrimitive enum");
+			return null;
 		}
 	}
 
 
-	public static final JavaPrimitive tryGetPrimitiveOrString(PrimitiveOrString t) {
+	public static final JPrimitiveType fromJNumericType(JNumericType t) throws IllegalArgumentException {
+		JPrimitiveType prim = tryFromJNumericType(t);
+		if(prim == null) {
+			throw new IllegalArgumentException("cannot convert " + JNumericType.class.getSimpleName() + " enum '" + t + "', has no " + JPrimitiveType.class.getSimpleName() + " equivalent");
+		}
+		return prim;
+	}
+
+
+	public static final JPrimitiveType tryFromJNumericType(JNumericType t) {
+		switch(t) {
+		case BYTE:
+			return BYTE;
+		case DOUBLE:
+			return DOUBLE;
+		case FLOAT:
+			return FLOAT;
+		case INT:
+			return INT;
+		case LONG:
+			return LONG;
+		case SHORT:
+			return SHORT;
+		default:
+			return null;
+		}
+	}
+
+
+	public static final JPrimitiveType fromPrimitiveOrString(PrimitiveOrString t) throws IllegalArgumentException {
+		JPrimitiveType prim = tryFromPrimitiveOrString(t);
+		if(prim == null) {
+			throw new IllegalArgumentException("cannot convert " + PrimitiveOrString.class.getSimpleName() + " enum '" + t + "', has no " + JPrimitiveType.class.getSimpleName() + " equivalent");
+		}
+		return prim;
+	}
+
+
+	public static final JPrimitiveType tryFromPrimitiveOrString(PrimitiveOrString t) {
 		switch(t) {
 		case BOOLEAN:
-			return JavaPrimitive.BOOLEAN;
+			return BOOLEAN;
 		case BYTE:
-			return JavaPrimitive.BYTE;
+			return BYTE;
 		case CHAR:
-			return JavaPrimitive.CHAR;
+			return CHAR;
 		case SHORT:
-			return JavaPrimitive.SHORT;
+			return SHORT;
 		case INT:
-			return JavaPrimitive.INT;
+			return INT;
 		case LONG:
-			return JavaPrimitive.LONG;
+			return LONG;
 		case FLOAT:
-			return JavaPrimitive.FLOAT;
+			return FLOAT;
 		case DOUBLE:
-			return JavaPrimitive.DOUBLE;
+			return DOUBLE;
 		case STRING:
-			throw new IllegalArgumentException("cannot convert PrimitiveOrString enum '" + PrimitiveOrString.STRING + "', has no JavaPrimitive equivalent");
+			return null;
 		default:
-			throw new IllegalArgumentException("cannot convert PrimitiveOrString enum '" + t + "' to JavaPrimitive enum");
+			return null;
 		}
 	}
 

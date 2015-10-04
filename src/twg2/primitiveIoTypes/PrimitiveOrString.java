@@ -24,7 +24,16 @@ public enum PrimitiveOrString {
 	}
 
 
-	public static PrimitiveOrString tryGetIoType(IoType t) {
+	public static PrimitiveOrString fromIoType(IoType t) {
+		PrimitiveOrString resType = tryFromIoType(t);
+		if(resType == null) {
+			throw new IllegalArgumentException("cannot convert " + IoType.class.getSimpleName() + " enum ''" + t + "', has no " + PrimitiveOrString.class.getSimpleName() + " equivalent");
+		}
+		return resType;
+	}
+
+
+	public static PrimitiveOrString tryFromIoType(IoType t) {
 		switch(t) {
 		case BOOLEAN:
 			return PrimitiveOrString.BOOLEAN;
@@ -45,9 +54,9 @@ public enum PrimitiveOrString {
 		case STRING:
 			return PrimitiveOrString.STRING;
 		case BINARY:
-			throw new IllegalArgumentException("cannot convert IoType enum '" + IoType.BINARY + "', has no PrimitiveOrString equivalent");
+			return null;
 		default:
-			throw new IllegalArgumentException("cannot convert IoType enum '" + t + "' to PrimitiveOrString enum");
+			return null;
 		}
 	}
 
