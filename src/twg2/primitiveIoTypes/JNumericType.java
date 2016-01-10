@@ -46,8 +46,8 @@ public enum JNumericType {
 	}
 
 
-	public static final JNumericType fromType(Class<?> type) {
-		JNumericType prim = tryFromType(type);
+	public static final JNumericType fromType(Class<?> type, boolean allowPrimitiveType, boolean allowWrapperType) {
+		JNumericType prim = tryFromType(type, allowPrimitiveType, allowWrapperType);
 		if(prim == null) {
 			throw new IllegalArgumentException("unknown numeric type: " + type);
 		}
@@ -55,7 +55,46 @@ public enum JNumericType {
 	}
 
 
+	public static final JNumericType tryFromType(Class<?> type, boolean allowPrimitiveType, boolean allowWrapperType) {
+		if(allowPrimitiveType) {
+			if(allowWrapperType) {
+				return tryFromPrimitiveOrWrapperType(type);
+			}
+			else {
+				return tryFromPrimitiveType(type);
+			}
+		}
+		else if(allowWrapperType) {
+			return tryFromWrapperType(type);
+		}
+		return null;
+	}
+
+
+	/** Alias for {@link #fromPrimitiveOrWrapperType(Class)}
+	 */
+	public static final JNumericType fromType(Class<?> type) {
+		return fromPrimitiveOrWrapperType(type);
+	}
+
+
+	public static final JNumericType fromPrimitiveOrWrapperType(Class<?> type) {
+		JNumericType prim = tryFromPrimitiveOrWrapperType(type);
+		if(prim == null) {
+			throw new IllegalArgumentException("unknown numeric type: " + type);
+		}
+		return prim;
+	}
+
+
+	/** Alias for {@link #tryFromPrimitiveOrWrapperType(Class)}
+	 */
 	public static final JNumericType tryFromType(Class<?> type) {
+		return tryFromPrimitiveOrWrapperType(type);
+	}
+
+
+	public static final JNumericType tryFromPrimitiveOrWrapperType(Class<?> type) {
 		if(type == Byte.TYPE || type == Byte.class) {
 			return BYTE;
 		}
@@ -90,22 +129,22 @@ public enum JNumericType {
 
 
 	public static final JNumericType tryFromWrapperType(Class<?> type) {
-		if(type == Byte.TYPE) {
+		if(type == Byte.class) {
 			return BYTE;
 		}
-		else if(type == Short.TYPE) {
+		else if(type == Short.class) {
 			return SHORT;
 		}
-		else if(type == Integer.TYPE) {
+		else if(type == Integer.class) {
 			return INT;
 		}
-		else if(type == Float.TYPE) {
+		else if(type == Float.class) {
 			return FLOAT;
 		}
-		else if(type == Long.TYPE) {
+		else if(type == Long.class) {
 			return LONG;
 		}
-		else if(type == Double.TYPE) {
+		else if(type == Double.class) {
 			return DOUBLE;
 		}
 		else {
@@ -124,22 +163,22 @@ public enum JNumericType {
 
 
 	public static final JNumericType tryFromPrimitiveType(Class<?> type) {
-		if(type == Byte.class) {
+		if(type == Byte.TYPE) {
 			return BYTE;
 		}
-		else if(type == Short.class) {
+		else if(type == Short.TYPE) {
 			return SHORT;
 		}
-		else if(type == Integer.class) {
+		else if(type == Integer.TYPE) {
 			return INT;
 		}
-		else if(type == Float.class) {
+		else if(type == Float.TYPE) {
 			return FLOAT;
 		}
-		else if(type == Long.class) {
+		else if(type == Long.TYPE) {
 			return LONG;
 		}
-		else if(type == Double.class) {
+		else if(type == Double.TYPE) {
 			return DOUBLE;
 		}
 		else {

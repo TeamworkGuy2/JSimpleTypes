@@ -46,8 +46,8 @@ public enum JPrimitiveType {
 	}
 
 
-	public static final JPrimitiveType fromType(Class<?> type) {
-		JPrimitiveType prim = tryFromType(type);
+	public static final JPrimitiveType fromType(Class<?> type, boolean allowPrimitiveType, boolean allowWrapperType) {
+		JPrimitiveType prim = tryFromType(type, allowPrimitiveType, allowWrapperType);
 		if(prim == null) {
 			throw new IllegalArgumentException("unknown primitive type: " + type);
 		}
@@ -55,7 +55,46 @@ public enum JPrimitiveType {
 	}
 
 
+	public static final JPrimitiveType tryFromType(Class<?> type, boolean allowPrimitiveType, boolean allowWrapperType) {
+		if(allowPrimitiveType) {
+			if(allowWrapperType) {
+				return tryFromPrimitiveOrWrapperType(type);
+			}
+			else {
+				return tryFromPrimitiveType(type);
+			}
+		}
+		else if(allowWrapperType) {
+			return tryFromWrapperType(type);
+		}
+		return null;
+	}
+
+
+	/** Alias for {@link #fromPrimitiveOrWrapperType(Class)}
+	 */
+	public static final JPrimitiveType fromType(Class<?> type) {
+		return fromPrimitiveOrWrapperType(type);
+	}
+
+
+	public static final JPrimitiveType fromPrimitiveOrWrapperType(Class<?> type) {
+		JPrimitiveType prim = tryFromPrimitiveOrWrapperType(type);
+		if(prim == null) {
+			throw new IllegalArgumentException("unknown primitive type: " + type);
+		}
+		return prim;
+	}
+
+
+	/** Alias for {@link #tryFromPrimitiveOrWrapperType(Class)}
+	 */
 	public static final JPrimitiveType tryFromType(Class<?> type) {
+		return tryFromPrimitiveOrWrapperType(type);
+	}
+
+
+	public static final JPrimitiveType tryFromPrimitiveOrWrapperType(Class<?> type) {
 		if(type == Boolean.TYPE || type == Boolean.class) {
 			return BOOLEAN;
 		}
@@ -96,46 +135,6 @@ public enum JPrimitiveType {
 
 
 	public static final JPrimitiveType tryFromWrapperType(Class<?> type) {
-		if(type == Boolean.TYPE) {
-			return BOOLEAN;
-		}
-		else if(type == Byte.TYPE) {
-			return BYTE;
-		}
-		else if(type == Character.TYPE) {
-			return CHAR;
-		}
-		else if(type == Short.TYPE) {
-			return SHORT;
-		}
-		else if(type == Integer.TYPE) {
-			return INT;
-		}
-		else if(type == Float.TYPE) {
-			return FLOAT;
-		}
-		else if(type == Long.TYPE) {
-			return LONG;
-		}
-		else if(type == Double.TYPE) {
-			return DOUBLE;
-		}
-		else {
-			return null;
-		}
-	}
-
-
-	public static final JPrimitiveType fromPrimitiveType(Class<?> type) {
-		JPrimitiveType prim = tryFromPrimitiveType(type);
-		if(prim == null) {
-			throw new IllegalArgumentException("unknown primitive type: " + type);
-		}
-		return prim;
-	}
-
-
-	public static final JPrimitiveType tryFromPrimitiveType(Class<?> type) {
 		if(type == Boolean.class) {
 			return BOOLEAN;
 		}
@@ -158,6 +157,46 @@ public enum JPrimitiveType {
 			return LONG;
 		}
 		else if(type == Double.class) {
+			return DOUBLE;
+		}
+		else {
+			return null;
+		}
+	}
+
+
+	public static final JPrimitiveType fromPrimitiveType(Class<?> type) {
+		JPrimitiveType prim = tryFromPrimitiveType(type);
+		if(prim == null) {
+			throw new IllegalArgumentException("unknown primitive type: " + type);
+		}
+		return prim;
+	}
+
+
+	public static final JPrimitiveType tryFromPrimitiveType(Class<?> type) {
+		if(type == Boolean.TYPE) {
+			return BOOLEAN;
+		}
+		else if(type == Byte.TYPE) {
+			return BYTE;
+		}
+		else if(type == Character.TYPE) {
+			return CHAR;
+		}
+		else if(type == Short.TYPE) {
+			return SHORT;
+		}
+		else if(type == Integer.TYPE) {
+			return INT;
+		}
+		else if(type == Float.TYPE) {
+			return FLOAT;
+		}
+		else if(type == Long.TYPE) {
+			return LONG;
+		}
+		else if(type == Double.TYPE) {
 			return DOUBLE;
 		}
 		else {
