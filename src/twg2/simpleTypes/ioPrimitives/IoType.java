@@ -1,4 +1,4 @@
-package twg2.primitiveIoTypes;
+package twg2.simpleTypes.ioPrimitives;
 
 /** Data types
  * @author TeamworkGuy2

@@ -1,0 +1,10 @@
+{
+	"version" : "0.5.0",
+	"name" : "jsimple-types",
+	"description" : "Enums for Java primitive types and commonly serializable types",
+	"homepage" : "https://github.com/TeamworkGuy2/JSimpleTypes",
+	"license" : "MIT",
+	"main" : "./bin/jsimple_types.jar",
+	"dependencies" : {
+	}
+}

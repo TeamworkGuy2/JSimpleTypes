@@ -1,12 +1,12 @@
-package twg2.primitiveIoTypes.test;
+package twg2.simpleTypes.ioPrimitives.test;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import twg2.primitiveIoTypes.IoType;
-import twg2.primitiveIoTypes.JNumericType;
-import twg2.primitiveIoTypes.JPrimitiveType;
-import twg2.primitiveIoTypes.PrimitiveOrString;
+import twg2.simpleTypes.ioPrimitives.IoType;
+import twg2.simpleTypes.ioPrimitives.JNumericType;
+import twg2.simpleTypes.ioPrimitives.JPrimitiveType;
+import twg2.simpleTypes.ioPrimitives.PrimitiveOrString;
 
 /**
  * @author TeamworkGuy2

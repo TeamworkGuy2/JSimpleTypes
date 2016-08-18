@@ -1,14 +1,14 @@
 JSimpleTypes
 ==============
-version: 0.4.0
-
-Enums for Java primitive types and commonly serializable types. 
+version: 0.5.0
 
 Dependencies:
 None
 
-####typeInfo/
+Enums for Java primitive types and commonly serializable types. 
+
+####ioPrimitives/
 enums for java primitives and commonly serialized types (used by other projects such as DataTransfer)
 
 ####test/
-JUnit tests and examples (requires JUnit 4 and [Lombok] (https://projectlombok.org/))
+JUnit tests and examples (requires [JUnit 4] (http://junit.org/) and [Lombok] (https://projectlombok.org/))
