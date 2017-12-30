@@ -2,9 +2,10 @@ package twg2.simpleTypes.ioPrimitives;
 
 import lombok.Getter;
 
-/**
+/** Java primitive data types with their primitive and wrapper types,
+ * as well as variations of their name, including the language primitive name, wrapper class name, capitalized short name, and several others (see {@code get} methods).
  * @author TeamworkGuy2
- * @since 20151-18
+ * @since 2015-1-18
  */
 public enum JPrimitiveType {
 	BOOLEAN(Boolean.TYPE, Boolean.class, IoType.BOOLEAN, PrimitiveOrString.BOOLEAN, Boolean.FALSE,              "boolean","Boolean",  "boolean","Boolean","boolean",  "Boolean"),

@@ -7,20 +7,23 @@ import lombok.Getter;
  * @since 2015-5-22
  */
 public enum PrimitiveOrString {
-	BOOLEAN(IoType.BOOLEAN),
-	BYTE(IoType.BYTE),
-	CHAR(IoType.CHAR),
-	SHORT(IoType.SHORT),
-	INT(IoType.INT),
-	LONG(IoType.LONG),
-	FLOAT(IoType.FLOAT),
-	DOUBLE(IoType.DOUBLE),
-	STRING(IoType.STRING);
+	BOOLEAN(IoType.BOOLEAN, Boolean.TYPE),
+	BYTE(IoType.BYTE, Byte.TYPE),
+	CHAR(IoType.CHAR, Character.TYPE),
+	SHORT(IoType.SHORT, Short.TYPE),
+	INT(IoType.INT, Integer.TYPE),
+	LONG(IoType.LONG, Long.TYPE),
+	FLOAT(IoType.FLOAT, Float.TYPE),
+	DOUBLE(IoType.DOUBLE, Double.TYPE),
+	STRING(IoType.STRING, String.class);
 
 	final @Getter IoType ioType;
+	final @Getter Class<?> type;
 
-	private PrimitiveOrString(IoType ioType) {
+
+	private PrimitiveOrString(IoType ioType, Class<?> type) {
 		this.ioType = ioType;
+		this.type = type;
 	}
 
 
