@@ -1,7 +1,5 @@
 package twg2.simpleTypes.ioPrimitives;
 
-import lombok.Getter;
-
 /**
  * @author TeamworkGuy2
  * @since 2015-5-22
@@ -17,13 +15,23 @@ public enum PrimitiveOrString {
 	DOUBLE(IoType.DOUBLE, Double.TYPE),
 	STRING(IoType.STRING, String.class);
 
-	final @Getter IoType ioType;
-	final @Getter Class<?> type;
+	final IoType ioType;
+	final Class<?> type;
 
 
 	private PrimitiveOrString(IoType ioType, Class<?> type) {
 		this.ioType = ioType;
 		this.type = type;
+	}
+
+
+	public IoType getIoType() {
+		return ioType;
+	}
+
+
+	public Class<?> getType() {
+		return type;
 	}
 
 

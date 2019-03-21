@@ -1,7 +1,5 @@
 package twg2.simpleTypes.ioPrimitives;
 
-import lombok.Getter;
-
 /** Java primitive data types with their primitive and wrapper types,
  * as well as variations of their name, including the language primitive name, wrapper class name, capitalized short name, and several others (see {@code get} methods).
  * @author TeamworkGuy2
@@ -17,17 +15,17 @@ public enum JPrimitiveType {
 	LONG(Long.TYPE, Long.class, IoType.LONG, PrimitiveOrString.LONG,                Long.valueOf((long)0),      "long",   "Long",     "long",   "Long",   "long",     "Long"),
 	DOUBLE(Double.TYPE, Double.class, IoType.DOUBLE, PrimitiveOrString.DOUBLE,      Double.valueOf((double)0),  "double", "Double",   "double", "Double", "double",   "Double");
 
-	final @Getter Class<?> type;
-	final @Getter Class<?> wrapperType;
-	final @Getter IoType ioType;
-	final @Getter PrimitiveOrString primitiveOrStringType;
-	final @Getter Object defaultValue;
-	final @Getter String javaPrimitiveName;
-	final @Getter String javaObjectName;
-	final @Getter String shortName;
-	final @Getter String shortTitleCaseName;
-	final @Getter String fullName;
-	final @Getter String fullTitleCaseName;
+	final Class<?> type;
+	final Class<?> wrapperType;
+	final IoType ioType;
+	final PrimitiveOrString primitiveOrStringType;
+	final Object defaultValue;
+	final String javaPrimitiveName;
+	final String javaObjectName;
+	final String shortName;
+	final String shortTitleCaseName;
+	final String fullName;
+	final String fullTitleCaseName;
 
 
 	private JPrimitiveType(Class<?> type, Class<?> wrapperType, IoType ioType, PrimitiveOrString primitiveOrStringType, Object defaultValue, String javaPrimitiveName, String javaObjectName,
@@ -44,6 +42,61 @@ public enum JPrimitiveType {
 		this.shortTitleCaseName = shortTitleCaseName;
 		this.fullName = fullName;
 		this.fullTitleCaseName = fullTitleCaseName;
+	}
+
+
+	public Class<?> getType() {
+		return type;
+	}
+
+
+	public Class<?> getWrapperType() {
+		return wrapperType;
+	}
+
+
+	public IoType getIoType() {
+		return ioType;
+	}
+
+
+	public PrimitiveOrString getPrimitiveOrStringType() {
+		return primitiveOrStringType;
+	}
+
+
+	public Object getDefaultValue() {
+		return defaultValue;
+	}
+
+
+	public String getJavaPrimitiveName() {
+		return javaPrimitiveName;
+	}
+
+
+	public String getJavaObjectName() {
+		return javaObjectName;
+	}
+
+
+	public String getShortName() {
+		return shortName;
+	}
+
+
+	public String getShortTitleCaseName() {
+		return shortTitleCaseName;
+	}
+
+
+	public String getFullName() {
+		return fullName;
+	}
+
+
+	public String getFullTitleCaseName() {
+		return fullTitleCaseName;
 	}
 
 

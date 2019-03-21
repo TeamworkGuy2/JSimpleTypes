@@ -4,7 +4,13 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 
 --------
-###[0.5.1](N/A) - 2017-12-30
+### [0.5.2](N/A) - 2019-03-21
+#### Changed
+* Removed 'lombok' dependency (added manual getters to JNumericType, JPrimitiveType, PrimitiveOrString)
+
+
+--------
+### [0.5.1](https://github.com/TeamworkGuy2/JSimpleTypes/commit/5347a944a1229c6b09c24236fe1114a90a08ab44) - 2017-12-30
 #### Added
 * Added `getType()` to PrimitiveOrString enum
 
@@ -33,10 +39,18 @@ This project does its best to adhere to [Semantic Versioning](http://semver.org/
 
 --------
 ### [0.3.0](https://github.com/TeamworkGuy2/JSimpleTypes/commit/4dabed523151962929a313972bb395986e5a17ad) - 2015-10-04
+#### Added
+* Added JNumericType and .from...() functions for JPrimitiveType and PrimitiveOrString to convert back and forth between all 3.
+
+#### Changed
+* Refactored JavaPrimitive to JPrimitive type.
 
 
 --------
 ### [0.2.0](https://github.com/TeamworkGuy2/JSimpleTypes/commit/31aa0855b34c27b72172101d6e54292506dc91f4) - 2015-09-07
+#### Changed
+* Renamed JavaPrimitives -> JavaPrimitive
+* Moved files to common twg2 package used across other projects.
 
 
 --------

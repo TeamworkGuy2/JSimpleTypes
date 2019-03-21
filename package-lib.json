@@ -1,5 +1,5 @@
 {
-	"version" : "0.5.1",
+	"version" : "0.5.2",
 	"name" : "jsimple-types",
 	"description" : "Enums for Java primitive types and commonly serializable types",
 	"homepage" : "https://github.com/TeamworkGuy2/JSimpleTypes",
